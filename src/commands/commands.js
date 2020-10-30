@@ -1,7 +1,7 @@
 
 const saludar = (message) => {
     const timeTaken = Date.now() - message.createdTimestamp;
-    message.reply(`Hola! mandar este mensaje me tomó ${timeTaken}ms.`);
+    message.reply(`Hola! nena`);
 };
 
 const ctm = (message) => {
