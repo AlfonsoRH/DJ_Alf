@@ -27,30 +27,22 @@ client.on('ready',()=>{
     client.user.setActivity(config.statusBOT);
     commands.registerCategories(config.categories);
     commands.registerCommands();
-
-
-    
 });
 
 client.on("message",async (message)=>{
     if(message.author.bot)return;
     let prefix = config.prefix;
-    
+    if(!(message.content[0] == prefix) ) return;
     let cmd = message.content.slice(prefix.length);
 
     if(cmd != undefined){
-        cmd = cmd.split('');
+        cmd = cmd.split(' ');
     }
-    console.log(cmd)
-    let result = await commands.checkPerms(message, cmd, prefix);
-    console.log(result)
+    let result = await commands.checkValidCmd(message, cmd, prefix);
     if(result){
         commands.executeCmd(message,cmd);
     }
-    else util.getSend(message, 'El comando no existe');
-    
- 
-
+    else util.getSend(message, 'El comando no existe'); 
 })
 
 
