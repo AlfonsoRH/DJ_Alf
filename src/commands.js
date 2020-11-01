@@ -15,6 +15,9 @@ class Command {
 
     checkArgs(msg, msgArgs) {
         var valid = true
+        console.log(`MENSAJE: ${msg}`);
+        console.log(`ARGS: ${msgArgs}`);
+
         if (this.args != undefined) {
             if (msgArgs.length == 0 && this.args.find(x => !x.optional) != undefined) {
                 util.getSend(msg, 'Requiere un argumento');
@@ -201,7 +204,7 @@ module.exports = {
 
     },
     checkValidCmd: async function (msg, args, prefix) {
-        var command = this.getCmd(arg[0]);
+        var command = this.getCmd(args[0]);
 
         if (msg.content.startsWith(prefix) && command != null) {
             let result = this.checkPerms(msg, command.permLvl);
@@ -218,8 +221,9 @@ module.exports = {
 
 
     executeCmd: async function (msg, args, discord, client) {
-        let cmd = this.getCmd(args[0])
-        if (cmd.checkArgs(msg, args.slice(1))) {
+        
+        let cmd = this.getCmd(args[0]);
+        if ( cmd.checkArgs(msg, args.slice(1))  ) {
             await cmd.execute(msg, args.slice(1), discord, client)
         }
     }
