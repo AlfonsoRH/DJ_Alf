@@ -10,7 +10,8 @@ module.exports = {
     PORT: process.env.PORT,
     categories: [
         { name: 'test', priority: 5 }, 
-        { name: 'general', priority: 8 }
+        { name: 'general', priority: 8 },
+        { name: 'music', priority: 7 }
     ],
     ranks: [
         { name: 'User', permLevel: 0 },

@@ -14,6 +14,8 @@ const listener = app.listen(PORT, () => {
 
 
 
+
+
 //BOT
 const Discord = require('discord.js');
 const client = new Discord.Client();
@@ -21,6 +23,7 @@ const config = require('./config.js');
 const util = require('./util.js');
 const commands = require('./commands.js');
 
+client.queue = new Map();
 
 client.on('ready',()=>{
     console.log('It\'s Britney Bitch! ');
@@ -40,7 +43,7 @@ client.on("message",async (message)=>{
     }
     let result = await commands.checkValidCmd(message, cmd, prefix);
     if(result){
-        commands.executeCmd(message,cmd);
+        commands.executeCmd(message,cmd, Discord, client);
     }
     else util.getSend(message, 'El comando no existe'); 
 })
